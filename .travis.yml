@@ -7,9 +7,6 @@ services:
   - docker
 env:
   - TOX_ENV=lint
-  - TOX_ENV=py37-compose7
-  - TOX_ENV=py37-compose8
-  - TOX_ENV=py37-compose9
   - TOX_ENV=py37-compose10
   - TOX_ENV=py37-compose11
   - TOX_ENV=py37-compose12

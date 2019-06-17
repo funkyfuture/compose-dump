@@ -36,7 +36,7 @@ setup(
     author_email='funkyfuture@riseup.net',
     license='ISC',
     platforms=["any"],
-    install_requires=['docker-compose>=1.7,<=1.24'],
+    install_requires=['docker-compose>=1.10,<=1.24'],
     tests_require=['tox'],
     packages=find_packages(exclude=['tests.*', 'tests']),
     include_package_data=True,
