@@ -2,11 +2,25 @@ sudo: required
 dist: xenial
 language: python
 cache: pip
-python: 3.7
+python: "3.7"
 services:
   - docker
 env:
   - TOX_ENV=lint
+  - TOX_ENV=py35-compose10
+  - TOX_ENV=py35-compose11
+  - TOX_ENV=py35-compose12
+  - TOX_ENV=py35-compose13
+  - TOX_ENV=py35-compose14
+  - TOX_ENV=py35-compose15
+  - TOX_ENV=py35-compose16
+  - TOX_ENV=py35-compose17
+  - TOX_ENV=py35-compose18
+  - TOX_ENV=py35-compose19
+  - TOX_ENV=py35-compose20
+  - TOX_ENV=py35-compose21
+  - TOX_ENV=py35-compose22
+  - TOX_ENV=py35-compose23
   - TOX_ENV=py37-compose10
   - TOX_ENV=py37-compose11
   - TOX_ENV=py37-compose12
@@ -22,5 +36,6 @@ env:
   - TOX_ENV=py37-compose22
   - TOX_ENV=py37-compose23
   - TOX_ENV=compose-master
+
 install: travis_retry pip install tox
 script: tox -e $TOX_ENV
