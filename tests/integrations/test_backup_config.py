@@ -57,6 +57,12 @@ def test_config_with_build_context_v2(project_dir, temp_dir):
     assert identical_folder_contents(project_dir, target_folder / 'config')
 
 
+def test_config_with_duplicated_build_context(project_dir, temp_dir):
+    assert result_okay(['backup', '-t', str(temp_dir)])
+    target_folder = get_target_folder(temp_dir)
+    assert identical_folder_contents(project_dir, target_folder / 'config')
+
+
 @mark.parametrize('resolve_symlinks', (True, False))
 def test_nested_extends(project_dir, temp_dir, resolve_symlinks):
     args = ['backup', '-t', str(temp_dir)]

@@ -58,7 +58,7 @@ def parse_cli_args(args):
 
 def add_backup_parser(subparsers):
     desc, hlp = backup.__doc__.split('####\n')
-    parser = subparsers.add_parser('backup', description=desc, help=hlp)
+    parser = subparsers.add_parser('backup', description=desc.strip(), help=hlp.strip())
     parser.set_defaults(action=backup)
     parser.add_argument('--config', action='store_true', default=False,
                         help='Include configuration files, including referenced files '

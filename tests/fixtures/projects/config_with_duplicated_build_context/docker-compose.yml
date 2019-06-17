@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+  custom:
+    build:
+      context: ./context
+
+  custom2:
+    build:
+      context: ./context
