@@ -28,18 +28,21 @@ See planned features below.
 Installation
 ------------
 
-With `pipsi`_ (recommended to avoid library version conflicts)::
+With `pipx`_ (recommended to avoid library version conflicts), also installs
+Docker-Compose::
 
-    $ pipsi install compose-dump
+    $ pipx install compose-dump
 
-Or with `pip`_::
+Or with `pip`_, installs Docker-Compose when not already present in the installation
+context::
 
     $ pip install compose-dump
 
-To install an editable development instance::
+The package is managed with poetry_. To install it in editable_ mode, including
+Docker-Compose::
 
-    $ cd compose-dump
-    $ pipsi install -e .  # or use `pip`
+    …/compose-dump $ poetry install
+
 
 Usage
 -----
@@ -164,6 +167,8 @@ restore
 
 
 .. _`Docker Compose`: https://docs.docker.com/compose/
+.. _editable: https://packaging.python.org/guides/distributing-packages-using-setuptools/#working-in-development-mode
 .. _`file system path protocol`: https://www.python.org/dev/peps/pep-0519/
 .. _`pip`: https://packaging.python.org/installing/#use-pip-for-installing
-.. _`pipsi`: https://github.com/mitsuhiko/pipsi
+.. _`pipx`: https://pipxproject.github.io/pipx/
+.. _poetry: https://poetry.eustace.io/docs/

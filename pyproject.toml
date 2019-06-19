@@ -1,0 +1,42 @@
+[tool.poetry]
+name = "compose-dump"
+version = "0.1b5"
+description = "Backup tool for Docker-Compose projects"
+readme = "README.rst"
+documentation = "http://compose-dump.rtfd.io/'"
+repository = "https://github.com/funkyfuture/compose-dump"
+authors = ["Frank Sachsenheim <funkyfuture@riseup.net>"]
+license = "GPL-3.0+"
+classifiers=[
+    'Development Status :: 4 - Beta',
+    'Environment :: Console',
+    'Intended Audience :: System Administrators',
+    'Operating System :: POSIX',
+    'Programming Language :: Python',
+    'Programming Language :: Python :: 3',
+    'Programming Language :: Python :: 3.5',
+    'Programming Language :: Python :: 3.6',
+    'Programming Language :: Python :: 3.7',
+    'Programming Language :: Python :: Implementation :: CPython',
+    'Topic :: System :: Archiving :: Backup'
+]
+keywords = ["docker-compose", "backup", "archiving"]
+
+[tool.poetry.scripts]
+compose-dump = 'compose_dump.main:main'
+
+[tool.poetry.dependencies]
+python = "^3.5"
+docker-compose = ">=1.10,<=1.24"
+
+[tool.poetry.dev-dependencies]
+flake8 = "^3.7"
+pytest = "^4.6"
+pytest-mock = "^1.10"
+Sphinx = "^2.1"
+sphinx_rtd_theme = "^0.4.3"
+tox = "^3.12"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

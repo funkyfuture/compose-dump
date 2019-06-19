@@ -1,7 +1,7 @@
 .PHONY: all
 .DEFAULT_GOAL := test
 
-VERSION = $(shell grep "VERSION =" setup.py | cut -f3 -d" " | tr -d "'")
+VERSION = $(shell grep -oP "^version = \K.+" pyproject.toml)
 COMMIT = $(shell git rev-parse HEAD)
 
 define PRINT_HELP_PYSCRIPT
@@ -56,7 +56,7 @@ release: lint test clean ## push to git repo 'origin' and release on PyPI
 	git tag -f $(VERSION)
 	git push origin master
 	git push -f origin $(VERSION)
-	python setup.py sdist bdist_wheel upload
+	poetry publish --build
 
 dist: clean ## builds source and wheel package
 	python setup.py sdist

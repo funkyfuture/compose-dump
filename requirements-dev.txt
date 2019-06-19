@@ -1,6 +1,0 @@
-flake8
-pytest>=3.4
-pytest-mock
-Sphinx
-sphinx_rtd_theme
-tox
