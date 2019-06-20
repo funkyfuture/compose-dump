@@ -60,7 +60,9 @@ def pytest_addoption(parser):
 
 def change_to_project_path(request):
     cwd = os.getcwd()
-    project_name = request.function.__name__[len("test_") :].split("__", 1)[0]
+    project_name = request.function.__name__[len("test_") :].split(  # noqa: E203
+        "__", 1
+    )[0]
     project_path = PROJECTS_PATH / project_name
     os.chdir(str(project_path))
     return project_path, cwd
