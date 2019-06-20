@@ -1,9 +1,10 @@
 import logging
 import os
 import sys
-from argparse import ArgumentParser
+from argparse import ArgumentParser, RawDescriptionHelpFormatter
 from collections import OrderedDict
 from pathlib import Path
+from textwrap import dedent
 from types import SimpleNamespace
 
 from compose import config as compose_config
@@ -45,20 +46,36 @@ def directory_exists(path):
 
 
 def parse_cli_args(args):
-    parser = ArgumentParser()
+    parser = ArgumentParser(
+        description="""\
+Backup and restore Docker-Compose projects.
+Restoring is not implemented yet.
+
+Use one of the subcommands `backup` or `restore`.
+For help on each append the `--help` argument.
+
+Online documentation: http://compose-dump.rtfd.io/""",
+        formatter_class=RawDescriptionHelpFormatter,
+    )
     parser.add_argument("--version", action="version", version=VERSION)
     subparsers = parser.add_subparsers()
     add_backup_parser(subparsers)
     add_restore_parser(subparsers)
     args = parser.parse_args(args)
     if not hasattr(args, "action"):
-        args.action = help
+        parser.print_help()
+        raise SystemExit(0)
     return args
 
 
 def add_backup_parser(subparsers):
-    desc, hlp = backup.__doc__.split("####\n")  # FIXME
-    parser = subparsers.add_parser("backup", description=desc.strip(), help=hlp.strip())
+    desc, hlp = dedent(backup.__doc__).split("####\n")
+    parser = subparsers.add_parser(
+        "backup",
+        description=desc.strip(),
+        help=hlp.strip(),
+        formatter_class=RawDescriptionHelpFormatter,
+    )
     parser.set_defaults(action=backup)
     parser.add_argument(
         "--config",
@@ -128,7 +145,7 @@ def add_backup_parser(subparsers):
         "--volumes",
         action="store_true",
         default=False,
-        help="Include container volumes.",
+        help="Include project and container volumes.",
     )
     parser.add_argument(
         "services",
@@ -148,14 +165,7 @@ def add_restore_parser(parser):
 
 def help(args):
     print(
-        """Backup and restore Docker-Compose projects.
-
-Use one of the subcommands `backup` or `restore`.
-For help on each append the `--help` argument.
-
-Restoring is not implemented yet.
-
-Online documentation: http://compose-dump.rtfd.io/
+        """
 """
     )
 
@@ -166,13 +176,15 @@ Online documentation: http://compose-dump.rtfd.io/
 def backup(args):
     """
     Backup a project and its data. Containers are not saved.
-
     If none of the include flags is provided, all are set to true.
 
     For example:
 
         $ compose-compose_dump backup -t /var/backups/docker-compose
+
     ####
+
+    Creates an archive of a Docker-Compose project.
     """
     options = process_backup_options(vars(args).copy())
     config, config_details, environment = get_compose_context(options)
