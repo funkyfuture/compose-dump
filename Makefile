@@ -18,6 +18,9 @@ export PRINT_HELP_PYSCRIPT
 help:
 	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
 
+black: ## format the code
+	black setup.py compose_dump tests
+
 clean: clean-build clean-pyc clean-test  ## remove all artifacts
 
 clean-build: ## remove build artifacts
@@ -38,7 +41,8 @@ clean-test: ## remove test and coverage artifacts
 	rm -f .coverage
 	rm -fr htmlcov/
 
-lint: ## check style with flake8
+lint: ## check style with black and flake8
+	black --check setup.py compose_dump tests
 	flake8 deck_chores tests
 
 test: ## run tests

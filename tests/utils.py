@@ -8,7 +8,7 @@ from compose_dump import main
 
 
 def count_dir_contents(path):
-    return len(tuple(path.glob('*')))
+    return len(tuple(path.glob("*")))
 
 
 def identical_files(file1, file2):
@@ -16,10 +16,10 @@ def identical_files(file1, file2):
 
 
 def identical_folder_contents(folder1, folder2, follow_symlinks=True):
-    contents1 = set(x.name for x in folder1.glob('*'))
-    contents2 = set(x.name for x in folder2.glob('*'))
+    contents1 = set(x.name for x in folder1.glob("*"))
+    contents2 = set(x.name for x in folder2.glob("*"))
 
-    msg = ''
+    msg = ""
     if contents1 ^ contents2:
         missing_content = contents1 - contents2
         if missing_content:
@@ -28,7 +28,7 @@ def identical_folder_contents(folder1, folder2, follow_symlinks=True):
         extra_content = contents2 - contents1
         if extra_content:
             if msg:
-                msg += '\n'
+                msg += "\n"
             msg += "Unexpected contents in %s: %s" % (folder2, extra_content)
 
         raise AssertionError(msg)
@@ -54,7 +54,7 @@ def get_target_folder(target_folder):
 
 def hash_file(file):
     result = md5()
-    with file.open('rb') as f:
+    with file.open("rb") as f:
         while True:
             chunk = f.read(4096)
             if not chunk:
@@ -69,28 +69,30 @@ def log_message(level, text_pattern, caplog):
         if record[0] == level and re.match(text_pattern, record[1]):
             break
     else:
-        raise AssertionError("Pattern %s at level %s not found in:\n%s" % (text_pattern, level, records))
+        raise AssertionError(
+            "Pattern %s at level %s not found in:\n%s" % (text_pattern, level, records)
+        )
     return True
 
 
 def result_okay(args):
     run_result = run(args)
     if run_result.exit_code != 0:
-        raise AssertionError('Exit code: %s' % run_result.exit_code)
+        raise AssertionError("Exit code: %s" % run_result.exit_code)
     return True
 
 
 def run(args):
-    args.insert(0, 'compose-dump')
-    args.insert(2, '--verbose')
+    args.insert(0, "compose-dump")
+    args.insert(2, "--verbose")
     argv = sys.argv.copy()
     sys.argv = args
     try:
         main.main()
     except SystemExit as e:
         sys.argv = argv
-        args.remove('compose-dump')
-        args.remove('--verbose')
+        args.remove("compose-dump")
+        args.remove("--verbose")
         result = SimpleNamespace()
         result.exit_code = e.code
         return result

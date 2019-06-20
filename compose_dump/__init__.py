@@ -1,3 +1,3 @@
 import pkg_resources
 
-VERSION = pkg_resources.get_distribution('compose-dump').version
+VERSION = pkg_resources.get_distribution("compose-dump").version

@@ -27,9 +27,9 @@ class PathSet(Set):
 
 
 def get_container_with_project_volume(project, volume_name):
-    volume_name = '%s_%s' % (project.name, volume_name)
+    volume_name = "%s_%s" % (project.name, volume_name)
     for service in project.services:
-        for volume in service.options.get('volumes', ()):
+        for volume in service.options.get("volumes", ()):
             if volume.external == volume_name:
                 container = get_container_for_service(service)
                 if container:
@@ -38,8 +38,9 @@ def get_container_with_project_volume(project, volume_name):
 
 
 def get_container_for_service(service):
-    containers = service.containers(stopped=True) or \
-                 service.containers(stopped=True, one_off=True)
+    containers = service.containers(stopped=True) or service.containers(
+        stopped=True, one_off=True
+    )
     if containers:
         return containers[0]
     else:
@@ -62,5 +63,7 @@ def normpath(path):
 
 def setup_loghandler(handler, verbose=False):
     log_level = logging.DEBUG if verbose else logging.INFO
-    handler.setFormatter(logging.Formatter('{asctime}::{levelname}::{message}', style='{'))
+    handler.setFormatter(
+        logging.Formatter("{asctime}::{levelname}::{message}", style="{")
+    )
     handler.setLevel(log_level)

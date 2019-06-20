@@ -101,7 +101,8 @@ Contributing
 ------------
 
 Fork it, report issues and open pull requests at
-https://github.com/funkyfuture/compose-dump .
+https://github.com/funkyfuture/compose-dump . All code is to be formatted with
+black_.
 
 Testing
 ~~~~~~~
@@ -163,6 +164,7 @@ restore
 -  read from stdin
 
 
+.. _black: https://black.readthedocs.io/
 .. _`Docker Compose`: https://docs.docker.com/compose/
 .. _`file system path protocol`: https://www.python.org/dev/peps/pep-0519/
 .. _`pip`: https://packaging.python.org/installing/#use-pip-for-installing
