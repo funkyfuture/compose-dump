@@ -1,4 +1,4 @@
-black
+black==19.10b0
 flake8
 pytest>=3.4
 pytest-mock
