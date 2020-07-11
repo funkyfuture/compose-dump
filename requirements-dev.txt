@@ -1,7 +1,7 @@
 black
 flake8
 pytest>=3.4
-pytest-mock
+pytest-mock==3.2.0
 Sphinx
 sphinx_rtd_theme
 tox
