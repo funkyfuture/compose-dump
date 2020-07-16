@@ -3,5 +3,5 @@ flake8
 pytest>=3.4
 pytest-mock
 Sphinx
-sphinx_rtd_theme
+sphinx_rtd_theme==0.5.0
 tox
